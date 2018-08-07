@@ -190,7 +190,6 @@ func commandBuild(build Build) *exec.Cmd {
 		"-t", build.Name,
 	}
 
-	args = append(args, build.Context)
 	if build.Squash {
 		args = append(args, "--squash")
 	}
@@ -227,6 +226,7 @@ func commandBuild(build Build) *exec.Cmd {
 		args = append(args, "--label", fmt.Sprintf("org.label-schema.%s", label))
 	}
 
+	args = append(args, build.Context)
 	return exec.Command(dockerExe, args...)
 }
 
